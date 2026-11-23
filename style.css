@@ -1,0 +1,597 @@
+/* ==========================================================
+   Body Scent — Global Theme
+   โทนพรีเมียม เรียบหรู มินิมอล | ขาว-ครีม-เบจเข้ม + ทอง/บรอนซ์อ่อน
+   ========================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Noto+Serif+Thai:wght@300;400;500&family=Sarabun:wght@300;400;500&display=swap");
+
+/* ---------- Tokens ---------- */
+:root {
+  /* Base palette */
+  --ivory: #fcfaf6;        /* พื้นหลังหลัก */
+  --cream: #f4eee3;        /* พื้นหลังส่วนสลับ */
+  --sand: #e6dccb;         /* เส้นแบ่งอ่อน */
+  --beige-deep: #b9a789;   /* เบจเข้ม */
+  --ink: #2c2721;          /* ข้อความหลัก (น้ำตาลเข้ม ไม่ใช่ดำสนิท) */
+  --ink-soft: #6b6256;     /* ข้อความรอง */
+
+  /* Accent: ทอง/บรอนซ์อ่อน */
+  --bronze: #a8825a;
+  --bronze-soft: #c4a77d;
+
+  /* Mood (ใช้เป็นจุดเล็กๆ เท่านั้น) */
+  --mood-fresh: #3f5f4a;      /* เขียวเข้ม */
+  --mood-sweet: #8a6a9c;      /* ม่วงกลาง */
+  --mood-confident: #44525f;  /* น้ำเงินเทาเข้ม */
+  --mood-romance: #c47a74;    /* แดงอ่อน */
+
+  /* Typography */
+  --font-display: "Cormorant Garamond", "Noto Serif Thai", Georgia, serif;
+  --font-body: "Sarabun", "Noto Serif Thai", "Helvetica Neue", Arial, sans-serif;
+
+  /* Spacing scale */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2.5rem;
+  --space-5: 4rem;
+  --space-6: 6.5rem;
+  --space-7: 9rem;
+
+  /* Lines */
+  --line: 1px solid var(--sand);
+  --line-strong: 1px solid var(--ink);
+
+  --container: 1120px;
+  --ease: cubic-bezier(0.3, 0.1, 0.2, 1);
+}
+
+/* Mood hook: ใส่ data-mood="fresh|sweet|confident|romance" ที่ element ใดก็ได้ */
+[data-mood="fresh"]     { --mood: var(--mood-fresh); }
+[data-mood="sweet"]     { --mood: var(--mood-sweet); }
+[data-mood="confident"] { --mood: var(--mood-confident); }
+[data-mood="romance"]   { --mood: var(--mood-romance); }
+
+/* ---------- Reset & Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--ivory);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.85;
+  letter-spacing: 0.01em;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s var(--ease);
+}
+a:hover { color: var(--bronze); }
+
+h1, h2, h3, h4 {
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+}
+h1 { font-size: clamp(2.4rem, 5.5vw, 4.25rem); font-weight: 400; line-height: 1.15; }
+h2 { font-size: clamp(1.75rem, 3.4vw, 2.5rem); }
+h3 { font-size: 1.35rem; }
+
+p { margin: 0 0 var(--space-2); color: var(--ink-soft); max-width: 62ch; }
+
+:focus-visible {
+  outline: 1px solid var(--bronze);
+  outline-offset: 4px;
+}
+
+::selection { background: var(--sand); color: var(--ink); }
+
+/* ---------- Layout ---------- */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--space-3);
+}
+
+.section { padding-block: var(--space-6); }
+.section--cream { background: var(--cream); }
+.section--tight { padding-block: var(--space-5); }
+
+.section-head {
+  max-width: 640px;
+  margin: 0 auto var(--space-5);
+  text-align: center;
+}
+.section-head p { margin-inline: auto; }
+
+/* เส้นทองสั้นๆ ใต้หัวข้อ */
+.rule {
+  display: block;
+  width: 48px;
+  height: 1px;
+  margin: var(--space-3) auto;
+  background: var(--bronze);
+  border: 0;
+}
+.rule--left { margin-left: 0; }
+
+/* ---------- Header / Nav ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(252, 250, 246, 0.94);
+  backdrop-filter: blur(8px);
+  border-bottom: var(--line);
+}
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 76px;
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+}
+
+.nav { display: flex; gap: var(--space-4); }
+.nav a {
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+  padding-block: 0.25rem;
+  border-bottom: 1px solid transparent;
+}
+.nav a:hover { border-bottom-color: var(--bronze); }
+
+/* ---------- Buttons (เส้นบาง ไม่ฉูดฉาด) ---------- */
+.btn {
+  display: inline-block;
+  padding: 0.95rem 2.4rem;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  line-height: 1;
+  color: var(--ink);
+  background: transparent;
+  border: var(--line-strong);
+  border-radius: 0;
+  cursor: pointer;
+  transition: background 0.35s var(--ease), color 0.35s var(--ease), border-color 0.35s var(--ease);
+}
+.btn:hover {
+  background: var(--ink);
+  color: var(--ivory);
+}
+.btn--solid { background: var(--ink); color: var(--ivory); }
+.btn--solid:hover { background: transparent; color: var(--ink); }
+.btn--bronze { border-color: var(--bronze); color: var(--bronze); }
+.btn--bronze:hover { background: var(--bronze); color: var(--ivory); border-color: var(--bronze); }
+.btn--small { padding: 0.7rem 1.5rem; font-size: 0.85rem; }
+
+/* ---------- Hero ---------- */
+.hero {
+  padding-block: var(--space-7) var(--space-6);
+  text-align: center;
+}
+.hero p {
+  margin-inline: auto;
+  font-size: 1.1rem;
+}
+.hero .btn { margin-top: var(--space-3); }
+
+/* ---------- Mood marker (จุดสีเล็กๆ) ---------- */
+.dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--mood, var(--bronze));
+  vertical-align: middle;
+}
+
+/* เส้นสั้นสีตาม mood ใต้หัวข้อ */
+.mood-rule {
+  display: block;
+  width: 36px;
+  height: 2px;
+  margin: var(--space-2) 0;
+  background: var(--mood, var(--bronze));
+  border: 0;
+}
+
+/* ป้ายชื่อ mood: จุด + ตัวอักษรสีปกติ */
+.mood-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+}
+.mood-label::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--mood, var(--bronze));
+}
+
+/* ---------- Filter (เลือก mood / type) ---------- */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3) var(--space-4);
+  margin-bottom: var(--space-5);
+}
+.filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.4rem 0;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+  background: none;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  cursor: pointer;
+  transition: color 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+.filter-btn:hover { color: var(--ink); }
+.filter-btn.is-active {
+  color: var(--ink);
+  border-bottom-color: var(--bronze);
+}
+
+/* ---------- Product grid & card ---------- */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--space-5) var(--space-4);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  border: 0;
+}
+
+.card__media {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--cream);
+  border: var(--line);
+}
+.card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s var(--ease);
+}
+.card:hover .card__media img { transform: scale(1.03); }
+
+.card__body { padding-top: var(--space-3); }
+.card__title {
+  margin: var(--space-1) 0 0.25rem;
+  font-size: 1.2rem;
+}
+.card__meta {
+  margin: 0 0 var(--space-1);
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+}
+.card__desc {
+  margin: 0 0 var(--space-2);
+  font-size: 0.92rem;
+  line-height: 1.75;
+}
+.card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: var(--space-2);
+  border-top: var(--line);
+}
+.price {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: var(--bronze);
+}
+.price small {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  margin-left: 0.2rem;
+}
+
+/* ---------- Feature blocks (จุดสี mood เป็นไอคอนเล็กๆ) ---------- */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-5) var(--space-4);
+}
+.feature {
+  padding-top: var(--space-3);
+  border-top: var(--line);
+}
+.feature h3 { margin-top: var(--space-2); }
+.feature p { font-size: 0.95rem; }
+
+/* ---------- Simple form (ใช้กับส่วนสั่งซื้อ/ติดต่อ) ---------- */
+.field { margin-bottom: var(--space-3); }
+.field label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+}
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  padding: 0.8rem 0;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--ink);
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--beige-deep);
+  border-radius: 0;
+  transition: border-color 0.3s var(--ease);
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: none;
+  border-bottom-color: var(--bronze);
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+  padding-block: var(--space-5);
+  background: var(--cream);
+  border-top: var(--line);
+  text-align: center;
+}
+.site-footer .logo { display: block; margin-bottom: var(--space-2); }
+.site-footer p {
+  margin-inline: auto;
+  font-size: 0.85rem;
+}
+
+/* ---------- Utilities ---------- */
+.text-center { text-align: center; }
+.text-bronze { color: var(--bronze); }
+.mt-3 { margin-top: var(--space-3); }
+.mt-4 { margin-top: var(--space-4); }
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ==========================================================
+   Page-specific
+   ========================================================== */
+
+/* ---------- index.html: Hero เต็มจอ ---------- */
+.hero--full {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 77px);
+  min-height: calc(100svh - 77px);
+}
+.hero--full h1 {
+  max-width: 18em;
+  margin-inline: auto;
+  font-size: clamp(2rem, 4.6vw, 3.5rem);
+  line-height: 1.5;
+}
+.hero--full h1 span { display: block; }
+.hero--full .rule { margin-block: var(--space-4); }
+
+/* ---------- index.html: การ์ด mood ---------- */
+.mood-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-3);
+}
+.mood-card {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-4) var(--space-3);
+  background: transparent;
+  border: 1px solid var(--sand);
+  transition: border-color 0.35s var(--ease);
+}
+.mood-card:hover { border-color: var(--bronze); color: inherit; }
+.mood-card .dot { width: 9px; height: 9px; margin-bottom: var(--space-3); }
+.mood-card h3 { margin-bottom: 0; }
+.mood-card .mood-name { font-size: 0.9rem; color: var(--ink-soft); letter-spacing: 0.06em; }
+.mood-card p { margin: 0; font-size: 0.95rem; }
+.mood-card .link-text {
+  margin-top: auto;
+  padding-top: var(--space-3);
+  font-size: 0.88rem;
+  letter-spacing: 0.06em;
+  color: var(--bronze);
+}
+
+/* ---------- order.html ---------- */
+.order-wrap {
+  max-width: 560px;
+  margin-inline: auto;
+}
+.order-wrap .field textarea {
+  min-height: 4.5rem;
+  resize: vertical;
+  line-height: 1.7;
+}
+.order-wrap .field .hint {
+  margin: 0.4rem 0 0;
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+}
+.order-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+.order-actions .back-link {
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+  border-bottom: 1px solid var(--sand);
+  padding-bottom: 0.15rem;
+}
+.order-actions .back-link:hover { color: var(--bronze); border-bottom-color: var(--bronze); }
+.btn:disabled { opacity: 0.5; cursor: wait; }
+
+/* ---------- thankyou.html ---------- */
+.thanks {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 77px);
+  min-height: calc(100svh - 77px);
+  text-align: center;
+}
+.thanks p { margin-inline: auto; }
+.thanks .btn { margin-top: var(--space-3); }
+
+/* ---------- admin.html ---------- */
+.table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--sand);
+}
+#ordersTable {
+  width: 100%;
+  min-width: 820px;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+#ordersTable th,
+#ordersTable td {
+  padding: 1rem 1.1rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--sand);
+}
+#ordersTable thead th {
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  background: var(--cream);
+  border-bottom: 1px solid var(--beige-deep);
+  white-space: nowrap;
+}
+#ordersTable tbody td {
+  color: var(--ink-soft);
+  white-space: pre-line;
+  word-break: break-word;
+}
+#ordersTable tbody tr:last-child td { border-bottom: 0; }
+#ordersTable th:nth-child(5),
+#ordersTable td:nth-child(5) {
+  text-align: right;
+  white-space: nowrap;
+  color: var(--bronze);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .section { padding-block: var(--space-5); }
+  .hero { padding-block: var(--space-6) var(--space-5); }
+  .nav { gap: var(--space-3); }
+}
+
+@media (max-width: 640px) {
+  :root { --container: 100%; }
+
+  body { font-size: 0.97rem; }
+  .container { padding-inline: 1.25rem; }
+  .section { padding-block: var(--space-5); }
+  .section-head { margin-bottom: var(--space-4); }
+
+  .site-header .container { min-height: 64px; }
+  .logo { font-size: 1.25rem; }
+  .nav { gap: 1.1rem; }
+  .nav a { font-size: 0.82rem; letter-spacing: 0.03em; }
+
+  .hero { padding-block: var(--space-5) var(--space-5); }
+
+  .filters { gap: var(--space-2) var(--space-3); margin-bottom: var(--space-4); }
+
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4) var(--space-2);
+  }
+  .card__desc { display: none; }
+  .card__title { font-size: 1.05rem; }
+  .card__footer { flex-direction: column; align-items: flex-start; gap: var(--space-1); }
+  .btn { padding: 0.9rem 1.8rem; }
+}
+
+@media (max-width: 380px) {
+  .product-grid { grid-template-columns: 1fr; }
+  .card__desc { display: block; }
+}
+
+/* ---------- Page-specific responsive ---------- */
+@media (max-width: 900px) {
+  .mood-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 560px) {
+  .mood-grid { grid-template-columns: 1fr; }
+  .mood-card { padding: var(--space-3); }
+  .order-actions { flex-direction: column-reverse; align-items: stretch; text-align: center; }
+  .order-actions .btn { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>สั่งซื้อสินค้า | Body Scent</title>
+  <meta name="description" content="กรอกข้อมูลเพื่อสั่งซื้อสินค้า Body Scent">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <a class="logo" href="index.html">BODY SCENT</a>
+      <nav class="nav" aria-label="เมนูหลัก">
+        <a href="index.html">หน้าแรก</a>
+        <a href="product.html">สินค้า</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h1>สั่งซื้อสินค้า</h1>
+          <hr class="rule">
+          <p>กรอกข้อมูลด้านล่างเพื่อยืนยันคำสั่งซื้อ ทีมงานจะติดต่อกลับตามช่องทางที่คุณให้ไว้</p>
+        </div>
+
+        <div class="order-wrap">
+          <form id="orderForm">
+            <div class="field">
+              <label for="customerName">ชื่อลูกค้า</label>
+              <input type="text" id="customerName" name="customerName" autocomplete="name" required>
+            </div>
+
+            <div class="field">
+              <label for="contact">เบอร์โทร / Line</label>
+              <input type="text" id="contact" name="contact" autocomplete="tel" required>
+            </div>
+
+            <div class="field">
+              <label for="items">รายการสินค้า</label>
+              <textarea id="items" name="items" rows="2" required></textarea>
+              <p class="hint">เลือกสินค้าจากหน้าสินค้า ระบบจะเติมรายการและราคาให้อัตโนมัติ</p>
+            </div>
+
+            <div class="field">
+              <label for="total">จำนวนเงินรวม (บาท)</label>
+              <input type="text" id="total" name="total" inputmode="decimal" required>
+            </div>
+
+            <div class="field">
+              <label for="note">หมายเหตุ</label>
+              <textarea id="note" name="note" rows="3"></textarea>
+            </div>
+
+            <div class="order-actions">
+              <a class="back-link" href="product.html">กลับไปเลือกสินค้า</a>
+              <button type="submit" class="btn btn--solid">ยืนยันสั่งซื้อ</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span class="logo">BODY SCENT</span>
+      <p>น้ำหอมฉีดตัวและโรลออน ออกแบบมาเพื่อทุกจังหวะของวัน</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
